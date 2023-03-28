@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.2.32616.157
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FastDown", "FastDown.csproj", "{9CFF1DB1-BEAA-4F1E-BFF0-286074A3E98E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9CFF1DB1-BEAA-4F1E-BFF0-286074A3E98E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CFF1DB1-BEAA-4F1E-BFF0-286074A3E98E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CFF1DB1-BEAA-4F1E-BFF0-286074A3E98E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CFF1DB1-BEAA-4F1E-BFF0-286074A3E98E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A4ADD89C-9772-4D9A-9FF5-0A1A10FB211C}
+	EndGlobalSection
+EndGlobal

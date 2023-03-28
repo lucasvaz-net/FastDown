@@ -1,0 +1,38 @@
+﻿
+@model FastDown.Models.ArquivosEPastasModel
+
+@{
+    ViewData["Title"] = "Inicio";
+}
+
+<style>
+
+</style>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <h2 class="meu-titulo text-center mb-4">Arquivos Disponíveis para Download</h2>
+            @if (Model.NomesArquivos.Count > 0)
+            {
+                <div class="list-group">
+                    @foreach (string arquivo in Model.NomesArquivos)
+                    {
+                                           
+                       <a href="@Url.Action("Download", new { arquivo = arquivo })" class="list-group-item list-group-item-action">
+                            <i class="fas fa-file mr-2"></i>@arquivo.Substring(0, arquivo.LastIndexOf('.'))
+                       </a>
+                    }
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-info text-center" role="alert">
+                    Nenhum arquivo disponível para download.
+                </div>
+            }
+        </div>
+    </div>
+</div>
+@section Scripts {
+    <script src="https://kit.fontawesome.com/9f2f49d3fa.js" crossorigin="anonymous"></script>
+}

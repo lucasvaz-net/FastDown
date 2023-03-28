@@ -1,0 +1,63 @@
+:root {
+    --primary-color: #222; /* tom de cinza escuro */
+    --secondary-color: #444; /* tom de cinza médio */
+    --tertiary-color: #666; /* tom de cinza claro */
+    --background-color: #444; /* cor de fundo em tom de cinza claro */
+}
+
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+    background-color: var(--background-color);
+}
+
+.navbar {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color);
+}
+
+
+.footer {
+    background-color: var(--primary-color) !important;
+    color: var(--background-color);
+}
+
+
+h2 {
+    color: var(--primary-color);
+}
+
+.list-group-item {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+    .list-group-item:hover {
+        background-color: var(--secondary-color);
+        color: aliceblue
+    }
+
+.alert {
+    background-color: var(--secondary-color);
+    color: white;
+}
+.custom-navbar {
+    background-color: gray;
+}
+.meu-titulo {
+    color: white;
+}
