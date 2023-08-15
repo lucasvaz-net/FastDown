@@ -1,6 +1,7 @@
 ﻿
 @model FastDown.Models.ArquivosEPastasModel
 
+
 @{
     ViewData["Title"] = "Inicio";
 }
@@ -17,8 +18,8 @@
                 <div class="list-group">
                     @foreach (string arquivo in Model.NomesArquivos)
                     {
-                                           
-                       <a href="@Url.Action("Download", new { arquivo = arquivo })" class="list-group-item list-group-item-action">
+
+                        <a href="@Url.Action("Download", new { arquivo = arquivo })" class="list-group-item list-group-item-action">
                             <i class="fas fa-file mr-2"></i>@arquivo.Substring(0, arquivo.LastIndexOf('.'))
                        </a>
                     }

@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Ci.ServerMap" Version="0.0.1" />
+    <PackageReference Include="FluentFTP" Version="47.1.0" />
     <PackageReference Include="Grpc.Core" Version="2.46.6" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
     <PackageReference Include="MimeKit" Version="3.6.0" />

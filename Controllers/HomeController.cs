@@ -1,67 +1,63 @@
 ﻿using FastDown.Models;
+using FluentFTP;
 using Microsoft.AspNetCore.Mvc;
-using System.Diagnostics;
-using System.IO;
-using System.Web;
-using System.Collections.Generic;
-using Grpc.Core;
-using MimeKit;
+using System.Reflection;
 
 
 namespace FastDown.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly string ftpServer = "win5113.site4now.net";
+        private readonly string ftpUser = "lucasvaz-001";
+        private readonly string ftpPassword = "Vitoriade10."; // Replace with your FTP password
 
-        // Caminho para a pasta que contém os arquivos
-         string caminhoPasta = @"C:\Users\TI 03\source\repos\FastDown\wwwroot\arquivos\";
-
-
-
-        public ActionResult DownloadArquivos([FromServices] IWebHostEnvironment hostingEnvironment)
+        public ActionResult DownloadArquivos()
         {
-            // Obter todos os arquivos na pasta
-            string[] arquivos = Directory.GetFiles(caminhoPasta);
+            List<string> fileNames = new List<string>();
 
-            // Criar um objeto da classe ArquivosEPastasModel
-            ArquivosEPastasModel arquivosEPastasModel = new ArquivosEPastasModel();
-
-            // Atribuir o nome da pasta
-            arquivosEPastasModel.NomePasta = caminhoPasta;
-
-            // Criar uma lista para armazenar os nomes dos arquivos
-            List<string> nomesArquivos = new List<string>();
-
-            // Adicionar o nome de cada arquivo à lista
-            foreach (string arquivo in arquivos)
+            using (FtpClient client = new FtpClient(ftpServer, ftpUser, ftpPassword))
             {
-                nomesArquivos.Add(Path.GetFileName(arquivo));
+               
+                client.Connect();
+
+                // Get files from the specified directory
+                var items = client.GetListing("/lucasvaz/FTP");
+
+                fileNames = items.Where(i => i.Size > 0)  // geralmente, pastas têm tamanho 0
+                  .Select(i => i.Name)
+                  .ToList();
+            }
+            var model = new ArquivosEPastasModel { NomesArquivos = fileNames };
+
+            return View(model);  // Passe a instância do modelo para a View
+        }
+        public ActionResult Download(string arquivo)
+        {
+          
+
+            byte[] fileData;
+
+            using (FtpClient client = new FtpClient(ftpServer, ftpUser, ftpPassword))
+            {
+                client.Connect();
+
+                using (MemoryStream ms = new MemoryStream())
+                {
+                    string fullPath = "/lucasvaz/FTP/" + arquivo;
+                    using (Stream ftpStream = client.OpenRead(fullPath))
+
+                    {
+                        ftpStream.CopyTo(ms);
+                    }
+                    fileData = ms.ToArray();
+                }
             }
 
-            // Atribuir a lista de nomes de arquivos ao objeto da classe ArquivosEPastasModel
-            arquivosEPastasModel.NomesArquivos = nomesArquivos;
-
-            // Retornar uma View com o objeto da classe ArquivosEPastasModel
-            return View(arquivosEPastasModel);
+            return File(fileData, "application/octet-stream", arquivo);
         }
 
 
-
-        public ActionResult Download([FromServices] IWebHostEnvironment hostingEnvironment, string arquivo)
-        {
- 
-            // Caminho completo do arquivo
-            string caminhoArquivo = caminhoPasta + arquivo;
-
-            // Verificar se o arquivo existe
-            if (!System.IO.File.Exists(caminhoArquivo))
-            {
-                return NotFound();
-            }
-
-            // Retornar o arquivo para download
-            return File(System.IO.File.ReadAllBytes(caminhoArquivo), MimeTypes.GetMimeType(caminhoArquivo), arquivo);
-        }
 
 
     }
